@@ -17,6 +17,7 @@ namespace Domain
         {
             UnvalidatedOrdersCart unvalidatedOrders = new UnvalidatedOrdersCart(command.InputOrder);
             IOrdersCart orders = ValidatedOrdersCartOP(checkOrderExist, unvalidatedOrders);
+            orders = CalculatePriceOfCart(orders);
 
             return orders.Match(
 
@@ -29,9 +30,6 @@ namespace Domain
                 );
 
         }
-        public PlacingOrderWorkflow()
-        {
-
-        }
+      
     }
 }

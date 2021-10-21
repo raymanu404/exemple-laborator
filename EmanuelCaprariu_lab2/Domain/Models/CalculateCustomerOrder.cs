@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    public record CalculateCustomerOrder(OrderRegistrationCode OrderRegistrationCode,OrderDescription OrderDescription, OrderAmount OrderAmount);
+    public record CalculateCustomerOrder(OrderRegistrationCode OrderRegistrationCode,OrderDescription OrderDescription, OrderAmount OrderAmount,OrderAddress OrderAddress,OrderPrice OrderPrice,OrderPrice FinalPrice);
    
 }

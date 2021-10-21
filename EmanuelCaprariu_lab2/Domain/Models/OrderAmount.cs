@@ -8,8 +8,8 @@ namespace Domain.Models
 {
     public class OrderAmount
     {
-        public decimal Amount { get; }
-        public OrderAmount(decimal amount)
+        public float Amount { get; }
+        public OrderAmount(float amount)
         {
             if(IsValid(amount))
             {
@@ -21,7 +21,7 @@ namespace Domain.Models
             }
         }
         public static OrderAmount operator +(OrderAmount a, OrderAmount b) => new OrderAmount((a.Amount + b.Amount));
-        private static bool IsValid(decimal decValue) => decValue > 0 && decValue <= 100;
+        private static bool IsValid(float decValue) => decValue > 0 && decValue <= 100;
 
         public override string ToString()
         {
@@ -32,7 +32,7 @@ namespace Domain.Models
         {
             bool isValid = false;
             orderAmount = null;
-            if(decimal.TryParse(value, out decimal decValue))
+            if(float.TryParse(value, out float decValue))
             {
                 if (IsValid(decValue))
                 {

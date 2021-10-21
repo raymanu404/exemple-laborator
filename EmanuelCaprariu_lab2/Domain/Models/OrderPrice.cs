@@ -20,7 +20,8 @@ namespace Domain.Models
                 throw new InvalidatedCustomerOrder("");
             }
         }
-
+       
+        public static OrderPrice operator * (OrderPrice a, OrderAmount b) => new OrderPrice((a.Price * b.Amount));
         private static bool IsValid(float decValue) => decValue > 0;
 
         public override string ToString()

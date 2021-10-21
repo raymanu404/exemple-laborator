@@ -11,11 +11,11 @@ namespace EmanuelCaprariu_lab2
 {
     class Program
     {
-        private static var listOfOrders;
+        //private static List<UnvalidatedCustomerOrder> listOfOrders;
         static void Main(string[] args)
         {
 
-            listOfOrders = ReadListOfOrders().ToArray();
+            var listOfOrders = ReadListOfOrders().ToArray();
             PlacingOrdersCommand command = new(listOfOrders);
             Domain.PlacingOrderWorkflow workflow = new Domain.PlacingOrderWorkflow();
 
@@ -43,21 +43,41 @@ namespace EmanuelCaprariu_lab2
                 option = ReadValue("Option :");              
                 switch (option)
                 {
-                   
+                    case "0":
+                        var listOfOrders1 = ReadListOfOrders().ToArray();
+                        PlacingOrdersCommand command1= new(listOfOrders1);
+                        Domain.PlacingOrderWorkflow workflow1 = new Domain.PlacingOrderWorkflow();
+
+                        var result1 = workflow1.Execute(command1, (checkOrderExist) => true);
+                        result.Match(
+
+                            whenPlacingOrderEventFailedEvent: @event =>
+                            {
+                                Console.WriteLine($"Placing the order was failed : {@event.Reason}");
+                                return @event;
+                            },
+                            whenPlacingOrderEventSuccedeedEvent: @event =>
+                            {
+                                Console.WriteLine($"Number Of order : {@event.NumberOfOrder} at Date: {@event.PlacedDate}");
+                                return @event;
+                            }
+                            );
+                        listOfOrdersCopied.CopyTo(0,listOfOrders1,0, listOfOrders1.Length);
+                        break;
                     case "1":
                         printThecart(listOfOrdersCopied);
                         break;
                     case "2":
                         string code = ReadValue("Check code...");
-                        checkOrderExist(listOfOrdersCopied, code);
+                        Console.WriteLine(checkOrderExist(listOfOrdersCopied, code));
                         break;
                     case "3":
                         string address = ReadValue("Check address...");
-                        checkOrderAddress(listOfOrdersCopied, address);
+                        Console.WriteLine(checkOrderAddress(listOfOrdersCopied, address));
                         break;
                     case "4":
                         string codeForStock = ReadValue("Check stock...");
-                        checkStockForSpecificOrder(listOfOrdersCopied, codeForStock);
+                        Console.WriteLine(checkStockForSpecificOrder(listOfOrdersCopied, codeForStock));
                         break;
                     case "clear":
                         Console.Clear();

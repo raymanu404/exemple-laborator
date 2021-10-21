@@ -12,6 +12,7 @@ namespace Domain
 {
     public static class OrdersOperation
     {
+      
         public static IOrdersCart ValidatedOrdersCartOP(Func<OrderRegistrationCode, bool> checkOrderExist, UnvalidatedOrdersCart orders)
         {
             List<ValidatedCustomerOrder> validatedOrders = new();
@@ -64,5 +65,40 @@ namespace Domain
             }
 
         }
+
+        public static IOrdersCart CalculatePriceOfCart(IOrdersCart orders) => orders.Match(
+             whenUnvalidatedOrdersCart: unvalidatedCustomerOrder => unvalidatedCustomerOrder,
+             whenInvalidatedOrdersCart: invalidatedCustomerOrder => invalidatedCustomerOrder,
+             whenCalculatedOrder: calculatedOrder =>calculatedOrder,
+             whenPlacedOrder: placedOrder => placedOrder,
+             whenCheckedOrderByCode: checkedOrderByCode => checkedOrderByCode,
+             whenValidatedOrdersCart: validatedOrdersCart =>
+             {
+                
+                 var calculatePrice = validatedOrdersCart.OrdersList.Select(validOrder =>
+                 new CalculateCustomerOrder(validOrder.OrderRegistrationCode, validOrder.OrderDescription, validOrder.OrderAmount, validOrder.OrderAddress, validOrder.OrderPrice, validOrder.OrderPrice * validOrder.OrderAmount));
+
+                 return new CalculatedOrder(calculatePrice.ToList().AsReadOnly());
+             }
+          );
+
+        public static IOrdersCart PlacedOrder(IOrdersCart orders) => orders.Match(
+             whenUnvalidatedOrdersCart: unvalidatedCustomerOrder => unvalidatedCustomerOrder,
+             whenInvalidatedOrdersCart: invalidatedCustomerOrder => invalidatedCustomerOrder,           
+             whenPlacedOrder: placedOrder => placedOrder,
+             whenCheckedOrderByCode: checkedOrderByCode => checkedOrderByCode,
+             whenValidatedOrdersCart: validatedOrdersCart => validatedOrdersCart,
+              whenCalculatedOrder: calculatedOrder => 
+             {
+                 StringBuilder csv = new();
+                 DateTime currentTime = DateTime.Now;
+                 Random random = new Random();
+                 int numberOfOrder = random.Next(1000, 9999);
+                 calculatedOrder.OrdersList.Aggregate(csv, (export, order) => export.AppendLine($"{order.OrderRegistrationCode.Value}, {order.OrderDescription.Description}, {order.OrderAmount.Amount}, {order.OrderAddress.Address}, {order.OrderPrice.Price}, {order.FinalPrice.Price}"));
+
+                 PlacedOrder placedOrder = new(calculatedOrder.OrdersList, numberOfOrder, currentTime);
+
+                 return placedOrder;
+            });
     }
 }
