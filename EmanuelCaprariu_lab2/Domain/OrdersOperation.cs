@@ -88,14 +88,14 @@ namespace Domain
              whenPlacedOrder: placedOrder => placedOrder,
              whenCheckedOrderByCode: checkedOrderByCode => checkedOrderByCode,
              whenValidatedOrdersCart: validatedOrdersCart => validatedOrdersCart,
-              whenCalculatedOrder: calculatedOrder => 
+             whenCalculatedOrder: calculatedOrder => 
              {
                  StringBuilder csv = new();
                  DateTime currentTime = DateTime.Now;
                  Random random = new Random();
                  int numberOfOrder = random.Next(1000, 9999);
                  calculatedOrder.OrdersList.Aggregate(csv, (export, order) => export.AppendLine($"{order.OrderRegistrationCode.Value}, {order.OrderDescription.Description}, {order.OrderAmount.Amount}, {order.OrderAddress.Address}, {order.OrderPrice.Price}, {order.FinalPrice.Price}"));
-
+         
                  PlacedOrder placedOrder = new(calculatedOrder.OrdersList, numberOfOrder, currentTime);
 
                  return placedOrder;

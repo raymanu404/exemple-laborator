@@ -1,6 +1,6 @@
 ﻿using System;
 using CSharp.Choices;
-
+using System.Collections.Generic;
 namespace Domain.Models
 {
     [AsChoice]
@@ -11,8 +11,10 @@ namespace Domain.Models
         {
             public decimal NumberOfOrder { get; }
             public DateTime PlacedDate { get; }
-            internal PlacingOrderEventSuccedeedEvent(decimal numberOfOrder,DateTime placedDate)
+            public IReadOnlyCollection<CalculateCustomerOrder> CalculatedOrder { get; }
+            internal PlacingOrderEventSuccedeedEvent(IReadOnlyCollection<CalculateCustomerOrder> calculatedOrder, decimal numberOfOrder,DateTime placedDate)
             {
+                CalculatedOrder = calculatedOrder;
                 NumberOfOrder = numberOfOrder;
                 PlacedDate = placedDate;
             }

@@ -24,11 +24,16 @@ namespace EmanuelCaprariu_lab2
 
                 whenPlacingOrderEventFailedEvent: @event =>
                 {
+                  
                     Console.WriteLine($"Placing the order was failed : {@event.Reason}");
                     return @event;
                 },
                 whenPlacingOrderEventSuccedeedEvent: @event =>
                 {
+                    foreach (var calc in @event.CalculatedOrder)
+                    {
+                        Console.WriteLine($"Final price -- {calc.OrderRegistrationCode}: {calc.FinalPrice} LEI");
+                    }
                     Console.WriteLine($"Number Of order : {@event.NumberOfOrder} at Date: {@event.PlacedDate}");
                     return @event;
                 }
