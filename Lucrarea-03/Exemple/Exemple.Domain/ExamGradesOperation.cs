@@ -12,6 +12,7 @@ namespace Exemple.Domain
 {
     public static class ExamGradesOperation
     {
+      
         public static Task<IExamGrades> ValidateExamGrades(Func<StudentRegistrationNumber, TryAsync<bool>> checkStudentExists, UnvalidatedExamGrades examGrades) =>
             examGrades.GradeList
                       .Select(ValidateStudentGrade(checkStudentExists))

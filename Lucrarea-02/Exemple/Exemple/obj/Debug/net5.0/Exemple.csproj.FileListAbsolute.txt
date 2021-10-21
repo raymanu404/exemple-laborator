@@ -47,3 +47,5 @@ E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-02\Exemple\Exemple\obj\Debug\net
 E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-02\Exemple\Exemple\obj\Debug\net5.0\ref\Exemple.dll
 E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-02\Exemple\Exemple\obj\Debug\net5.0\Exemple.pdb
 E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-02\Exemple\Exemple\obj\Debug\net5.0\Exemple.genruntimeconfig.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-02\Exemple\Exemple\bin\Debug\net5.0\LanguageExt.Core.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-02\Exemple\Exemple\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll

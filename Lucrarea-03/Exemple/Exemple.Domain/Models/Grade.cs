@@ -21,7 +21,7 @@ namespace Exemple.Domain.Models
         }
 
         public static Grade operator +(Grade a, Grade b) => new Grade((a.Value + b.Value) / 2m);
-
+            
 
         public Grade Round()
         {
