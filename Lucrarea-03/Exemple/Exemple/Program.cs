@@ -14,32 +14,12 @@ namespace Exemple
     class Program
     {
         private static readonly Random random = new Random();
-
+        static List<UnvalidatedStudentGrade> copyOfList = new List<UnvalidatedStudentGrade>();
         static async Task Main(string[] args)
         {
-            //var testNumber = StudentRegistrationNumber.TryParse("LM12345");
-            //var studentExists = await testNumber.Match(
-            //    Some: testNumber => CheckStudentExists(testNumber).Match(Succ: value => value, exception=>false),
-            //    None: () => Task.FromResult(false)
-            //);
-
-            //var result = from studentNumber in StudentRegistrationNumber.TryParse("LM12345")
-            //                                        .ToEitherAsync(() => "Invlid student registration number.")
-            //             from exists in CheckStudentExists(studentNumber)
-            //                                        .ToEither(ex =>
-            //                                        {
-            //                                            Console.Error.WriteLine(ex.ToString());
-            //                                            return "Could not validate student reg. number";
-            //                                        })
-            //             select exists;
-
-            //await result.Match(
-            //     Left: message => Console.WriteLine(message),
-            //     Right: flag => Console.WriteLine(flag));
-
-
 
             var listOfGrades = ReadListOfGrades().ToArray();
+            copyOfList = new List<UnvalidatedStudentGrade>(listOfGrades);
             PublishGradesCommand command = new(listOfGrades);
             PublishGradeWorkflow workflow = new();
             var result = await workflow.ExecuteAsync(command, CheckStudentExists);
@@ -57,6 +37,27 @@ namespace Exemple
                         return @event;
                     }
                 );
+
+
+            var testNumber = StudentRegistrationNumber.TryParse("LM12345");
+            var studentExists = await testNumber.Match(
+                Some: testNumber => CheckStudentExists(testNumber).Match(Succ: value => value, exception => false),
+                None: () => Task.FromResult(false)
+            );
+
+            var result1 = from studentNumber in StudentRegistrationNumber.TryParse("LM12345")
+                                                    .ToEitherAsync(() => "Invlid student registration number.")
+                          from exists in CheckStudentExists(studentNumber)
+                                                     .ToEither(ex =>
+                                                     {
+                                                         Console.Error.WriteLine(ex.ToString());
+                                                         return "Could not validate student reg. number";
+                                                     })
+                          select exists;
+
+            await result1.Match(
+                 Left: message => Console.WriteLine(message),
+                 Right: flag => Console.WriteLine(flag));
         }
 
         private static int Sum()
@@ -123,8 +124,17 @@ namespace Exemple
                      //var response = await client.PostAsync($"www.university.com/checkRegistrationNumber?number={student.Value}", new StringContent(""));
 
                      //response.EnsureSuccessStatusCode(); //200
+                     bool flag = false;
+                     foreach (UnvalidatedStudentGrade st in copyOfList)
+                     {
+                         if (st.StudentRegistrationNumber.Equals(student.Value))
+                         {
+                             flag = true;
+                         }
+                     }
 
-                     return true;
+
+                     return flag;
                  };
             return TryAsync(func);
         }
