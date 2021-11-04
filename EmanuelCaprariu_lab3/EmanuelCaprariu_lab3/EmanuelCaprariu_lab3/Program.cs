@@ -38,6 +38,7 @@ namespace EmanuelCaprariu_lab2
                     Console.WriteLine(@event.Csv);
                     foreach(var a in @event.CalculatedOrder)
                     {
+                        
                         listOfValidatedOrders.Add(new(a.OrderRegistrationCode,a.OrderDescription,a.OrderAmount,a.OrderAddress,a.OrderPrice));
                     }
                     Console.WriteLine($"Number Of order : {@event.NumberOfOrder} at Date: {@event.PlacedDate}");
@@ -131,6 +132,27 @@ namespace EmanuelCaprariu_lab2
                              Left: message => Console.WriteLine(message),
                              Right: flag => Console.WriteLine(flag));
                         break;
+                    case "5":
+                        string code3 = ReadValue("Check code for your order... {00000} ");
+                        testRegCode = OrderRegistrationCode.TryParseRegistrationCode(code3);
+                        var regExists1 = await testRegCode.Match(
+                            Some: testRegCode => CheckOrderExists(testRegCode).Match(Succ: value => value, exeption => false),
+                            None: () => Task.FromResult(false)
+                        );
+                        var myResult4 = from regCode in testRegCode
+                                                      .ToEitherAsync(() => "Invalid Amount of your order...")                                       
+                                        from price in CheckPriceForOrder(regCode)
+                                                      .ToEither(ex =>
+                                                      {
+                                                          Console.Error.WriteLine(ex.ToString());
+                                                          return "Could not validate Amount of order";
+                                                      })
+                                        select price;
+
+                        await myResult4.Match(
+                             Left: message => Console.WriteLine(message),
+                             Right: flag => Console.WriteLine("The price for your order: " + flag + " LEI "));
+                        break;
                     case "clear":
                         Console.Clear();
                         break;
@@ -198,7 +220,6 @@ namespace EmanuelCaprariu_lab2
                     }
                 }
 
-
                 return flag;
             };
             return TryAsync(func);
@@ -221,6 +242,7 @@ namespace EmanuelCaprariu_lab2
             return TryAsync(func);
         }
 
+
         private static TryAsync<bool> CheckOrderByAddress(OrderAddress order)
         {
             Func<Task<bool>> func = async () =>
@@ -234,6 +256,24 @@ namespace EmanuelCaprariu_lab2
                        }
                    }
                 return flag;
+            };
+
+            return TryAsync(func);
+        }
+
+        private static TryAsync<float> CheckPriceForOrder(OrderRegistrationCode order)
+        {
+            Func<Task<float>> func = async () =>
+            {
+                float price = 0;
+                foreach (var ord in listOfValidatedOrders)
+                {
+                    if (ord.OrderRegistrationCode.Value.Equals(order.Value))
+                    {
+                        price = ord.OrderPrice.Price;
+                    }
+                }
+                return price;
             };
 
             return TryAsync(func);
@@ -255,6 +295,7 @@ namespace EmanuelCaprariu_lab2
             Console.WriteLine("2.Check order by its reg code:");
             Console.WriteLine("3.Check address of order:");
             Console.WriteLine("4.Check stock for your order:");
+            Console.WriteLine("5.Get price for your order:")
             Console.WriteLine("q - exit");
             Console.WriteLine("Your option is ...");
             Console.WriteLine("-----------------------------------");

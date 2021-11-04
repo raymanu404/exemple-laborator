@@ -22,10 +22,10 @@ namespace Domain
 
             return orders.Match(
 
-                whenUnvalidatedOrdersCart: unvalidatedOrdersCart => new PlacingOrderEventFailedEvent("") as IPlacingOrderEvent,
+                whenUnvalidatedOrdersCart: unvalidatedOrdersCart => new PlacingOrderEventFailedEvent("Unexpected unvalidated state") as IPlacingOrderEvent,
                 whenInvalidatedOrdersCart: InvalidatedCustomerOrder => new PlacingOrderEventFailedEvent(InvalidatedCustomerOrder.Reason),
-                whenValidatedOrdersCart: validateOrdersCart => new PlacingOrderEventFailedEvent(""),
-                whenCalculatedOrder: calculateOrder => new PlacingOrderEventFailedEvent(""),
+                whenValidatedOrdersCart: validateOrdersCart => new PlacingOrderEventFailedEvent("Unexpected validated state"),
+                whenCalculatedOrder: calculateOrder => new PlacingOrderEventFailedEvent("Unexpected calculated state"),
                 whenCheckedOrderByCode: checkedOrderByCode => new PlacingOrderEventFailedEvent(""),
                 whenPlacedOrder: placedOrder => new PlacingOrderEventSuccedeedEvent(placedOrder.CalculateCustomerOrders, placedOrder.Csv, placedOrder.NumberOfOrder, placedOrder.PlacedDate)
                 );
