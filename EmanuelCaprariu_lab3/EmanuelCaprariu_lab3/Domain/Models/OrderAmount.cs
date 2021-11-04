@@ -11,7 +11,6 @@ namespace Domain.Models
     public class OrderAmount
     {
         public float Amount { get; }
-        public static float MAX_OF_AMOUNT { get; set; }
         public OrderAmount(float amount)
         {
             if(IsValid(amount))
@@ -24,7 +23,7 @@ namespace Domain.Models
             }
         }
         public static OrderAmount operator +(OrderAmount a, OrderAmount b) => new OrderAmount((a.Amount + b.Amount));
-        private static bool IsValid(float floatValue) => floatValue > 0 && floatValue <= MAX_OF_AMOUNT;
+        private static bool IsValid(float floatValue) => floatValue > 0 && floatValue <= 300;
 
         public override string ToString()
         {

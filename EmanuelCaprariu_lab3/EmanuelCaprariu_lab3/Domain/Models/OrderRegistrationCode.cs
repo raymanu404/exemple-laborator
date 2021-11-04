@@ -11,7 +11,7 @@ namespace Domain.Models
 {
     public record OrderRegistrationCode
     {
-        public static readonly Regex validCode = new("^[0-6]{5}$");
+        public static readonly Regex validCode = new("^RO[0-9]{5}$");
         public string Value { get; }
 
         private OrderRegistrationCode(string value)

@@ -60,15 +60,17 @@ namespace Domain.Models
         }
         public record PlacedOrder : IOrdersCart
         {
-            internal PlacedOrder(IReadOnlyCollection<CalculateCustomerOrder> calculateCustomerOrders,int numberOfOrder, DateTime placedDate)
+            internal PlacedOrder(IReadOnlyCollection<CalculateCustomerOrder> calculateCustomerOrders,string csv,int numberOfOrder, DateTime placedDate)
             {
                 CalculateCustomerOrders = calculateCustomerOrders;
                 NumberOfOrder = numberOfOrder;
                 PlacedDate = placedDate;
+                Csv = csv;
             }
             public IReadOnlyCollection<CalculateCustomerOrder> CalculateCustomerOrders { get; }
             public int NumberOfOrder { get; }
             public DateTime PlacedDate { get; }
+            public string Csv { get; }
 
         }
 

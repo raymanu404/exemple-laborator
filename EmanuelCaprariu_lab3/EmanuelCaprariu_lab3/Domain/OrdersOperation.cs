@@ -80,13 +80,14 @@ namespace Domain
         {
             Random random = new Random();
             int numberOfOrder = random.Next(1000, 9999);
-            calculatedOrder.OrdersList.Aggregate(new StringBuilder(), CreateOrderLine).ToString();
 
-            return new PlacedOrder(calculatedOrder.OrdersList, numberOfOrder, DateTime.Now);
+            return new PlacedOrder(calculatedOrder.OrdersList, 
+                                   calculatedOrder.OrdersList.Aggregate(new StringBuilder(), CreateCSVLine).ToString(), 
+                                   numberOfOrder, 
+                                   DateTime.Now);
         }
            
-
-        private static StringBuilder CreateOrderLine(StringBuilder export, CalculateCustomerOrder order) =>
+        private static StringBuilder CreateCSVLine(StringBuilder export, CalculateCustomerOrder order) =>
             export.AppendLine($"Code: {order.OrderRegistrationCode.Value} : {order.OrderDescription.Description} -- Amount: {order.OrderAmount.Amount} -- Address: {order.OrderAddress.Address} : {order.OrderPrice.Price} per Order -- {order.FinalPrice.Price} LEI");
 
     }

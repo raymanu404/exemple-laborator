@@ -12,13 +12,13 @@ namespace EmanuelCaprariu_lab2
 {
     class Program
     {
-        private static List<UnvalidatedCustomerOrder> copyListOfOrders = new();
+        private static List<ValidatedCustomerOrder> listOfValidatedOrders = new();       
         private static Option<OrderRegistrationCode> testRegCode;
         static async Task Main(string[] args)
         {
 
             var listOfOrders = ReadListOfOrders().ToArray();
-            copyListOfOrders = new List<UnvalidatedCustomerOrder>(listOfOrders);
+            listOfValidatedOrders = new List<ValidatedCustomerOrder>();
 
             PlacingOrdersCommand command = new(listOfOrders);
             Domain.PlacingOrderWorkflow workflow = new Domain.PlacingOrderWorkflow();
@@ -34,61 +34,40 @@ namespace EmanuelCaprariu_lab2
                 },
                 whenPlacingOrderEventSuccedeedEvent: @event =>
                 {
-                    foreach (var calc in @event.CalculatedOrder)
+                    Console.WriteLine("Placing order was succeed...");
+                    Console.WriteLine(@event.Csv);
+                    foreach(var a in @event.CalculatedOrder)
                     {
-                        Console.WriteLine($"Final price -- {calc.OrderRegistrationCode}: {calc.FinalPrice} LEI");
-                      
+                        listOfValidatedOrders.Add(new(a.OrderRegistrationCode,a.OrderDescription,a.OrderAmount,a.OrderAddress,a.OrderPrice));
                     }
                     Console.WriteLine($"Number Of order : {@event.NumberOfOrder} at Date: {@event.PlacedDate}");
                     return @event;
                 }
                 );
             string option;
-            List<UnvalidatedCustomerOrder> listOfOrdersCopied = new List<UnvalidatedCustomerOrder>(listOfOrders);
+
             do
             {
                 Console.WriteLine();
                 menu();
                 Console.WriteLine();
-                option = ReadValue("Option :");              
+                option = ReadValue("Option :");
                 switch (option)
                 {
-                    case "0":
-                        var listOfOrders1 = ReadListOfOrders().ToArray();
-                        copyListOfOrders = new List<UnvalidatedCustomerOrder>(listOfOrders1);
 
-                        PlacingOrdersCommand command1= new(listOfOrders1);
-                        Domain.PlacingOrderWorkflow workflow1 = new Domain.PlacingOrderWorkflow();
-
-                        var result1 = await workflow1.ExecuteAsync(command1, CheckOrderExists);
-                        result.Match(
-
-                            whenPlacingOrderEventFailedEvent: @event =>
-                            {
-                                Console.WriteLine($"Placing the order was failed : {@event.Reason}");
-                                return @event;
-                            },
-                            whenPlacingOrderEventSuccedeedEvent: @event =>
-                            {
-                                Console.WriteLine($"Number Of order : {@event.NumberOfOrder} at Date: {@event.PlacedDate}");
-                                return @event;
-                            }
-                            );
-                        listOfOrdersCopied.CopyTo(0,listOfOrders1,0, listOfOrders1.Length);
-                        break;
                     case "1":
-                        printThecart(listOfOrdersCopied);
+                        printThecart(listOfValidatedOrders);
                         break;
                     case "2":
-                        string code = ReadValue("Check code for your order... {00000}");
+                        string code = ReadValue("Check code for your order... {00000} ");
                         testRegCode = OrderRegistrationCode.TryParseRegistrationCode(code);
                         var orderExists = await testRegCode.Match(
                             Some: testRegCode => CheckOrderExists(testRegCode).Match(Succ: value => value, exeption => false),
                             None: () => Task.FromResult(false)
                         );
 
-                        var myResult = from registrationCode in OrderRegistrationCode.TryParseRegistrationCode(code)
-                                                                        .ToEitherAsync( () => "Invalid Registration Code of your order...")
+                        var myResult = from registrationCode in testRegCode
+                                                                        .ToEitherAsync(() => "Invalid Registration Code of your order...")
                                        from exists in CheckOrderExists(registrationCode)
                                                       .ToEither(ex =>
                                                       {
@@ -100,27 +79,47 @@ namespace EmanuelCaprariu_lab2
                         await myResult.Match(
                              Left: message => Console.WriteLine(message),
                              Right: flag => Console.WriteLine(flag));
-                            
+
                         break;
                     case "3":
                         string address = ReadValue("Check address...");
-                        Console.WriteLine(checkOrderAddress(listOfOrdersCopied, address));
+                        var testAddress = OrderAddress.TryParseOrderAddress(address);
+                        var addressExists = await testAddress.Match(
+                            Some:testAddress => CheckOrderByAddress(testAddress).Match(Succ: value=> value, exception => false),
+                            None: () => Task.FromResult(false)
+                            );
+
+                        var myResult3 = from addressOrder in testAddress
+                                                                .ToEitherAsync(() => "Invalid address for your order...")
+                                        from exists in CheckOrderByAddress(addressOrder)
+                                                                .ToEither(ex =>
+                                                                {
+                                                                    Console.Error.WriteLine(ex.ToString());
+                                                                    return "Could not validate address of order...";
+                                                                })
+                                        select exists;
+
+                        await myResult3.Match(
+                            Left: message =>Console.WriteLine(message),
+                            Right: flag => Console.WriteLine(flag)
+                            );                                      
                         break;
                     case "4":
-                        string code2 = ReadValue("Check code for your order... {00000}");
+                        string code2 = ReadValue("Check code for your order... {00000} ");
                         testRegCode = OrderRegistrationCode.TryParseRegistrationCode(code2);
-                        string stock = ReadValue("Check stock...");                 
-                        var testAmount = OrderAmount.TryParseOrderAmount(stock);
-                        var orderExists1 = await testAmount.Match(
-                            Some: testAmount => CheckOrderByStock(testAmount).Match(Succ: value => value, fail => false),
+                        var regExists = await testRegCode.Match(
+                            Some: testRegCode => CheckOrderExists(testRegCode).Match(Succ: value => value, exeption => false),
                             None: () => Task.FromResult(false)
                         );
-                                            
+
+                        string stock = ReadValue("Check stock...");
+                        var testAmount = OrderAmount.TryParseOrderAmount(stock);
+
                         var myResult2 = from regCode in testRegCode
                                                        .ToEitherAsync(() => "Invalid Amount of your order...")
                                         from amount in OrderAmount.TryParseOrderAmount(stock)
                                                                         .ToEitherAsync(() => "Invalid Amount of your order...")
-                                        from inStock in CheckOrderByStock(amount)
+                                        from inStock in CheckOrderByStock(regCode, amount)
                                                       .ToEither(ex =>
                                                       {
                                                           Console.Error.WriteLine(ex.ToString());
@@ -136,9 +135,9 @@ namespace EmanuelCaprariu_lab2
                         Console.Clear();
                         break;
                 }
-                
+
             } while (option != "q");
-            
+
         }
 
         private static List<UnvalidatedCustomerOrder> ReadListOfOrders()
@@ -174,12 +173,7 @@ namespace EmanuelCaprariu_lab2
                 {
                     break;
                 }
-                var more = ReadValue("more? y/n");
-                if (!more.Equals("y"))
-                {
-                    break;
-                }
-               
+                              
                 listOfOrders.Add(new(orderRegistrationCode, orderDescription, orderAmount, orderAddress, orderPrice));
             } while (true);
             return listOfOrders;
@@ -196,9 +190,9 @@ namespace EmanuelCaprariu_lab2
             Func<Task<bool>> func = async () =>
             {
                 bool flag = false;
-                foreach (UnvalidatedCustomerOrder ord in copyListOfOrders)
+                foreach (var ord in listOfValidatedOrders)
                 {
-                    if (ord.OrderRegistrationCode.Equals(order.Value))
+                    if (ord.OrderRegistrationCode.Value.Equals(order.Value))
                     {
                         flag = true;
                     }
@@ -210,19 +204,42 @@ namespace EmanuelCaprariu_lab2
             return TryAsync(func);
         }
 
-        private static TryAsync<bool> CheckOrderByStock(OrderAmount order)
+        private static TryAsync<bool> CheckOrderByStock(OrderRegistrationCode regCode,OrderAmount order)
         {
             Func<Task<bool>> func = async () =>
-            {
-                float stock = OrderAmount.MAX_OF_AMOUNT;
+            {             
                 bool flag = false;
-
+                foreach(var ord in listOfValidatedOrders)
+                {
+                    if (ord.OrderRegistrationCode.Value.Equals(regCode.Value) && ord.OrderAmount.Amount >= order.Amount)
+                    {
+                        flag = true;
+                    }
+                }
                 return flag;
             };
             return TryAsync(func);
         }
 
-        private static void printThecart(List<UnvalidatedCustomerOrder> ordersList)
+        private static TryAsync<bool> CheckOrderByAddress(OrderAddress order)
+        {
+            Func<Task<bool>> func = async () =>
+            {
+                   bool flag = false;
+                   foreach (var ord in listOfValidatedOrders)
+                   {
+                       if (ord.OrderAddress.Address.Equals(order.Address))
+                       {
+                           flag = true;
+                       }
+                   }
+                return flag;
+            };
+
+            return TryAsync(func);
+        }
+
+        private static void printThecart(List<ValidatedCustomerOrder> ordersList)
         {
             foreach (var order in ordersList)
             {
@@ -230,31 +247,18 @@ namespace EmanuelCaprariu_lab2
                 Console.WriteLine("-----------------------------------");
             }
         }
-        private static string checkOrderAddress(List<UnvalidatedCustomerOrder> ordersList,string address)
-        {
-            foreach (var order in ordersList)
-            {
-                if (order.OrderAddress.Equals(address))
-                {
-                    return $"The address is correct : {order.OrderAddress}";
-                }
-            }
-            return $"This address is invalid!";
-        }
-
-       
+          
         private static void menu()
         {
-            Console.WriteLine("-----------------------------------");
-            Console.WriteLine("0.Add more orders in your cart:");
+                  
             Console.WriteLine("1.Print list of orders:");
             Console.WriteLine("2.Check order by its reg code:");
             Console.WriteLine("3.Check address of order:");
             Console.WriteLine("4.Check stock for your order:");
-            Console.WriteLine("clear - to clear the screen");
             Console.WriteLine("q - exit");
             Console.WriteLine("Your option is ...");
-            
+            Console.WriteLine("-----------------------------------");
+
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Domain
                 whenValidatedOrdersCart: validateOrdersCart => new PlacingOrderEventFailedEvent(""),
                 whenCalculatedOrder: calculateOrder => new PlacingOrderEventFailedEvent(""),
                 whenCheckedOrderByCode: checkedOrderByCode => new PlacingOrderEventFailedEvent(""),
-                whenPlacedOrder: placedOrder => new PlacingOrderEventSuccedeedEvent(placedOrder.CalculateCustomerOrders,placedOrder.NumberOfOrder, placedOrder.PlacedDate)
+                whenPlacedOrder: placedOrder => new PlacingOrderEventSuccedeedEvent(placedOrder.CalculateCustomerOrders, placedOrder.Csv, placedOrder.NumberOfOrder, placedOrder.PlacedDate)
                 );
 
         }

@@ -10,3 +10,15 @@ E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab2\Domain\bin\Debug\net
 E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab2\Domain\obj\Debug\net5.0\Domain.dll
 E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab2\Domain\obj\Debug\net5.0\ref\Domain.dll
 E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab2\Domain\obj\Debug\net5.0\Domain.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\bin\Debug\net5.0\Domain.deps.json
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\bin\Debug\net5.0\Domain.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\bin\Debug\net5.0\ref\Domain.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\bin\Debug\net5.0\Domain.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\obj\Debug\net5.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\obj\Debug\net5.0\Domain.AssemblyInfoInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\obj\Debug\net5.0\Domain.AssemblyInfo.cs
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\obj\Debug\net5.0\Domain.csproj.CoreCompileInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\obj\Debug\net5.0\Domain.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\obj\Debug\net5.0\ref\Domain.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab3\EmanuelCaprariu_lab3\Domain\obj\Debug\net5.0\Domain.pdb

@@ -58,6 +58,7 @@ namespace Exemple
             await result1.Match(
                  Left: message => Console.WriteLine(message),
                  Right: flag => Console.WriteLine(flag));
+            Console.WriteLine(Sum());
         }
 
         private static int Sum()
@@ -65,13 +66,13 @@ namespace Exemple
             Option<int> two = Some(2);
             Option<int> four = Some(4);
             Option<int> six = Some(6);
-            Option<int> none = None;
+            //Option<int> none = None;
 
             var result = from x in two
                          from y in four
                          from z in six
-                         from n in none
-                         select x + y + z + n;
+                         //from n in none
+                         select x + y + z ;
             // This expression succeeds because all items to the right of 'in' are Some of int
             // and therefore it lands in the Some lambda.
             int r = match(result,

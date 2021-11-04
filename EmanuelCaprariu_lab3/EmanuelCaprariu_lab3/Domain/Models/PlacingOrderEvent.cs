@@ -11,10 +11,13 @@ namespace Domain.Models
         {
             public decimal NumberOfOrder { get; }
             public DateTime PlacedDate { get; }
+
+            public string Csv { get; }
             public IReadOnlyCollection<CalculateCustomerOrder> CalculatedOrder { get; }
-            internal PlacingOrderEventSuccedeedEvent(IReadOnlyCollection<CalculateCustomerOrder> calculatedOrder, decimal numberOfOrder,DateTime placedDate)
+            internal PlacingOrderEventSuccedeedEvent(IReadOnlyCollection<CalculateCustomerOrder> calculatedOrder,string csv, decimal numberOfOrder,DateTime placedDate)
             {
                 CalculatedOrder = calculatedOrder;
+                Csv = csv;
                 NumberOfOrder = numberOfOrder;
                 PlacedDate = placedDate;
             }
