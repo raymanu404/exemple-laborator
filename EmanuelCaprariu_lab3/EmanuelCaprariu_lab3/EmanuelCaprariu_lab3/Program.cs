@@ -8,7 +8,7 @@ using static Domain.Models.UnvalidatedCustomerOrder;
 using LanguageExt;
 using static LanguageExt.Prelude;
 
-namespace EmanuelCaprariu_lab2
+namespace EmanuelCaprariu_lab3
 {
     class Program
     {
@@ -43,7 +43,7 @@ namespace EmanuelCaprariu_lab2
                     }
                     Console.WriteLine($"Number Of order : {@event.NumberOfOrder} at Date: {@event.PlacedDate}");
                     return @event;
-                }
+                }                
                 );
             string option;
 
@@ -295,7 +295,7 @@ namespace EmanuelCaprariu_lab2
             Console.WriteLine("2.Check order by its reg code:");
             Console.WriteLine("3.Check address of order:");
             Console.WriteLine("4.Check stock for your order:");
-            Console.WriteLine("5.Get price for your order:")
+            Console.WriteLine("5.Get price for your order:");
             Console.WriteLine("q - exit");
             Console.WriteLine("Your option is ...");
             Console.WriteLine("-----------------------------------");
