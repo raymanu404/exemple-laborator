@@ -8,6 +8,10 @@ using LanguageExt;
 using static LanguageExt.Prelude;
 using Domain.Models;
 using Emanuel_Caprariu_lab4;
+using Emanuel_Caprariu_lab4.Data.Repositories;
+using Microsoft.Extensions.Logging;
+using Emanuel_Caprariu_lab4.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Emanuel_Caprariu_lab4
 {
@@ -15,16 +19,30 @@ namespace Emanuel_Caprariu_lab4
     {
         private static List<ValidatedCustomerOrder> listOfValidatedOrders = new();
         private static Option<OrderRegistrationCode> testRegCode;
+        private static readonly Random random = new Random();
+
+        private static string ConnectionString = @"Server=DESKTOP-T4A7BVN\User;Database=PSSC;Trusted_Connection=True;MultipleActiveResultSets=true";
         static async Task Main(string[] args)
         {
+            using ILoggerFactory loggerFactory = ConfigureLoggerFactory();
+            ILogger<PlacingOrderWorkflow> logger = loggerFactory.CreateLogger<PlacingOrderWorkflow>();
 
             var listOfOrders = ReadListOfOrders().ToArray();
             listOfValidatedOrders = new List<ValidatedCustomerOrder>();
 
-            PlacingOrdersCommand command = new(listOfOrders);
-            PlacingOrderWorkflow workflow = new PlacingOrderWorkflow();
+            var dbContextBuilder = new DbContextOptionsBuilder<OrdersContext>()
+                                               .UseSqlServer(ConnectionString)
+                                               .UseLoggerFactory(loggerFactory);
 
-            var result = await workflow.ExecuteAsync(command, CheckOrderExists);
+            OrdersContext context = new(dbContextBuilder.Options);
+            OrderHeaderRepository orderHeaderRepository = new(context);
+            OrderLineRepository orderLineRepository = new(context);
+            ProductRepository productRepository = new(context);
+
+            PlacingOrdersCommand command = new(listOfOrders);
+            PlacingOrderWorkflow workflow = new(orderHeaderRepository,productRepository,orderLineRepository, logger);
+
+            var result = await workflow.ExecuteAsync(command);
             result.Match(
 
                 whenPlacingOrderEventFailedEvent: @event =>
@@ -206,6 +224,18 @@ namespace Emanuel_Caprariu_lab4
         {
             Console.Write(prompt);
             return Console.ReadLine();
+        }
+
+        private static ILoggerFactory ConfigureLoggerFactory()
+        {
+            return LoggerFactory.Create(builder =>
+                                builder.AddSimpleConsole(options =>
+                                {
+                                    options.IncludeScopes = true;
+                                    options.SingleLine = true;
+                                    options.TimestampFormat = "hh:mm:ss ";
+                                })
+                                .AddProvider(new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider()));
         }
 
         private static TryAsync<bool> CheckOrderExists(OrderRegistrationCode order)

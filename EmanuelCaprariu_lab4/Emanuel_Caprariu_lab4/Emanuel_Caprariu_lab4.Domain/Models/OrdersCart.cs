@@ -32,6 +32,15 @@ namespace Domain.Models
             public string Reason { get; }
         }
 
+        public record FailedCart : IOrdersCart
+        {
+            internal FailedCart(string reason)
+            {              
+                Reason = reason;
+            }          
+            public string Reason { get; }
+        }
+
         public record ValidatedOrdersCart : IOrdersCart
         {
             internal ValidatedOrdersCart(IReadOnlyCollection<ValidatedCustomerOrder> ordersList)

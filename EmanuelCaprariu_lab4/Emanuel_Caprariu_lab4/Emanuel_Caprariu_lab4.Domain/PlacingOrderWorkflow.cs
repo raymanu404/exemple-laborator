@@ -19,9 +19,9 @@ namespace Emanuel_Caprariu_lab4
         private readonly IOrderHeaderRepository orderHeaderRepository;
         private readonly IOrderLineRepository orderLineRepository;
         private readonly IProductRepository productRepository;
-        private readonly ILogger<PlacedOrder> logger;
+        private readonly ILogger<PlacingOrderWorkflow> logger;
 
-        public PlacingOrderWorkflow(IOrderHeaderRepository orderHeaderRepository, IProductRepository productRepository, IOrderLineRepository orderLineRepository, ILogger<PlacedOrder> logger)
+        public PlacingOrderWorkflow(IOrderHeaderRepository orderHeaderRepository, IProductRepository productRepository, IOrderLineRepository orderLineRepository, ILogger<PlacingOrderWorkflow> logger)
         {
             this.orderHeaderRepository = orderHeaderRepository;
             this.productRepository = productRepository;
@@ -33,17 +33,18 @@ namespace Emanuel_Caprariu_lab4
             UnvalidatedOrdersCart unvalidatedOrders = new UnvalidatedOrdersCart(command.InputOrder);
 
             var result = from product in productRepository.TryGetExistingOrders(unvalidatedOrders.OrderList.Select(order => order.OrderRegistrationCode))
+                                                        .ToEither(ex => new FailedCart("") as IOrdersCart)
                          from existingOrder in orderLineRepository.TryGetExistingOrders()
-                                          //.ToEither(ex => new FailedExamGrades(unvalidatedGrades.GradeList, ex) as IExamGrades)
+                                          .ToEither(ex => new FailedCart("") as IOrdersCart)
                          let checkOrdersExists = (Func<OrderRegistrationCode, Option<OrderRegistrationCode>>)(order => CheckOrderExists(product, order))
                          from placedOrders in ExecuteWorkFlowAsync(unvalidatedOrders, existingOrder, checkOrdersExists).ToAsync()
                          from _ in orderLineRepository.TrySaveOrders(placedOrders)
-                                          //.ToEither(ex => new FailedExamGrades(unvalidatedGrades.GradeList, ex) as IExamGrades)
+                                          .ToEither(ex => new FailedCart("") as IOrdersCart)
                          select placedOrders;
 
             return await result.Match(
                     Left: orders => GenerateFailedEvent(orders) as IPlacingOrderEvent,
-                    Right: placedOrders => new PlacingOrderEventSuccedeedEvent(placedOrders.calculatedOrder ,placedOrders.csv, placedOrders.numberOfOrder, placedOrders.placedDate)
+                    Right: placedOrders => new PlacingOrderEventSuccedeedEvent(placedOrders.CalculateCustomerOrders ,placedOrders.Csv, placedOrders.NumberOfOrder, placedOrders.PlacedDate)
                 );
         }
 
@@ -62,6 +63,7 @@ namespace Emanuel_Caprariu_lab4
                 whenValidatedOrdersCart: validateOrdersCart => Left(validateOrdersCart as IOrdersCart),
                 whenCalculatedOrder: calculateOrder => Left(calculateOrder as IOrdersCart),
                 whenCheckedOrderByCode: checkedOrderByCode => Left(checkedOrderByCode as IOrdersCart),
+                whenFailedCart: failed => Left( failed as IOrdersCart),
                 whenPlacedOrder: placedOrder => Right(placedOrder)
                 );
 
@@ -83,12 +85,8 @@ namespace Emanuel_Caprariu_lab4
             orders.Match<PlacingOrderEventFailedEvent>(
                 whenUnvalidatedOrdersCart: unvalidatedOrdersCart => new($"Invalid state {nameof(UnvalidatedCustomerOrder)}"),
                 whenInvalidatedOrdersCart: invalidatedCustomerOrder => new(invalidatedCustomerOrder.Reason),
-                whenValidatedOrdersCart: validatedCustomerOrder => new($"Invalid state {nameof(validatedCustomerOrder)}"),
-                //whenFailedExamGrades: failedExamGrades =>
-                //{
-                //    logger.LogError(failedExamGrades.Exception, failedExamGrades.Exception.Message);
-                //    return new(failedExamGrades.Exception.Message);
-                //},
+                whenValidatedOrdersCart: validatedCustomerOrder => new($"Invalid state {nameof(validatedCustomerOrder)}"),           
+                whenFailedCart: failed => new($"Invalid state {nameof(FailedCart)}"),
                 whenCheckedOrderByCode: checkedOrderByCode => new($"Invalid state {nameof(CheckedOrderByCode)}"),
                 whenCalculatedOrder: calculateCustomerOrder => new($"Invalid state {nameof(CalculateCustomerOrder)}"),
                 whenPlacedOrder: placedOrder => new($"Invalid state {nameof(PlacedOrder)}")

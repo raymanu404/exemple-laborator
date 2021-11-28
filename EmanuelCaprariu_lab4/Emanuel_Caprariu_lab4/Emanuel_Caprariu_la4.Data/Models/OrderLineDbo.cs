@@ -10,9 +10,11 @@ namespace Emanuel_Caprariu_lab4.Data.Models
     {
         public int OrderLineId { get; set; }
         public int ProductId { get; set; }
-
+       
+        public string Address { get; set; }
         public float? Amount { get; set; }
         public float? Price { get; set; }
+        public float? FinalPrice { get; set; }
 
     }
 }
