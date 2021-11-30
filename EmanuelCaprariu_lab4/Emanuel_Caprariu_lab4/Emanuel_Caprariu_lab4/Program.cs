@@ -21,7 +21,7 @@ namespace Emanuel_Caprariu_lab4
         private static Option<OrderRegistrationCode> testRegCode;
         private static readonly Random random = new Random();
 
-        private static string ConnectionString = @"Server=DESKTOP-T4A7BVN\User;Database=PSSC;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private static string ConnectionString = @"Server=DESKTOP-T4A7BVN;Database=PSSC;Trusted_Connection=True;MultipleActiveResultSets=true";
         static async Task Main(string[] args)
         {
             using ILoggerFactory loggerFactory = ConfigureLoggerFactory();

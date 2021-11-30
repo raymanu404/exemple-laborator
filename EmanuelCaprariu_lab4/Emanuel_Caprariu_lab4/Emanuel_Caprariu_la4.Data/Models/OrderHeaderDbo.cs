@@ -10,6 +10,6 @@ namespace Emanuel_Caprariu_lab4.Data.Models
     {
         public int OrderId { get; set; }
         public string Address { get; set; }
-        public float Total { get; set; }
+        public float? Total { get; set; }
     }
 }

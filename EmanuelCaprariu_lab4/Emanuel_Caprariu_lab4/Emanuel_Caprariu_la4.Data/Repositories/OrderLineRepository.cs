@@ -26,7 +26,8 @@ namespace Emanuel_Caprariu_lab4.Data.Repositories
         public TryAsync<List<CalculateCustomerOrder>> TryGetExistingOrders() => async () => (await (
                          from o in ordersContext.OrdersLine
                          join p in ordersContext.Products on o.OrderLineId equals p.ProductId
-                         select new { o.OrderLineId,p.RegistrationCode, p.Description, o.Amount, o.Address, o.Price,o.FinalPrice})
+                         join oh in ordersContext.OrdersHeader on o.OrderId equals oh.OrderId
+                         select new { o.OrderLineId,p.RegistrationCode, p.Description, o.Amount, oh.Address, o.Price,oh.Total})
                          .AsNoTracking()
                          .ToListAsync())
                          .Select(result => new CalculateCustomerOrder(
@@ -35,7 +36,7 @@ namespace Emanuel_Caprariu_lab4.Data.Repositories
                                                    OrderAmount: new(result.Amount ?? 0f),
                                                    OrderAddress: new(result.Address),
                                                    OrderPrice: new(result.Price ?? 0f),
-                                                   FinalPrice: new(result.FinalPrice ?? 0f))
+                                                   FinalPrice: new(result.Total ?? 0f))
                          {
                              OrderLineId = result.OrderLineId
                          })
@@ -43,27 +44,27 @@ namespace Emanuel_Caprariu_lab4.Data.Repositories
 
         public TryAsync<Unit> TrySaveOrders(PlacedOrder orders) => async () =>
         {
-            var products = (await ordersContext.Products.ToListAsync()).ToLookup(student => student.RegistrationCode);
+            var products = (await ordersContext.Products.ToListAsync()).ToLookup(product => product.RegistrationCode);
+            var ordersHeader = (await ordersContext.OrdersHeader.ToListAsync()).ToLookup(order => order.OrderId);
             var newOrders = orders.CalculateCustomerOrders
                                     .Where(g => g.IsUpdated && g.OrderLineId == 0)
                                     .Select(g => new OrderLineDbo()
                                     {
                                         ProductId = products[g.OrderRegistrationCode.Value].Single().ProductId,
-                                        Address = g.OrderAddress.Address,
+                                        OrderId = ordersHeader[g.OrderHeaderId].Single().OrderId,
                                         Amount = g.OrderAmount.Amount,
                                         Price = g.OrderPrice.Price,
-                                        FinalPrice = g.FinalPrice.Price
 
-                                    }) ;
-            var updatedOrders = orders.CalculateCustomerOrders.Where(g => g.IsUpdated && g.OrderLineId > 0)
+
+                                    }); ;
+            var updatedOrders = orders.CalculateCustomerOrders.Where(g => g.IsUpdated && g.OrderHeaderId > 0)
                                     .Select(g => new OrderLineDbo()
                                     {
-                                        OrderLineId = g.OrderLineId,
-                                        ProductId = products[g.OrderRegistrationCode.Value].Single().ProductId,
-                                        Address = g.OrderAddress.Address,
+                                        OrderId = g.OrderHeaderId,
+                                        ProductId = products[g.OrderRegistrationCode.Value].Single().ProductId,                                      
                                         Amount = g.OrderAmount.Amount,
                                         Price = g.OrderPrice.Price,
-                                        FinalPrice = g.FinalPrice.Price
+                                       
                                     });
 
             ordersContext.AddRange(newOrders);

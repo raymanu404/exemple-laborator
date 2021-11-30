@@ -10,6 +10,6 @@ namespace Emanuel_Caprariu_lab4.Domain.Repositories
 {
     public interface IOrderHeaderRepository
     {
-        TryAsync<List<OrderAddress>> TryGetExistingOrders(IEnumerable<string> ordertsToCheck);
+        TryAsync<List<int>> TryGetExistingOrders(IEnumerable<int> ordertsToCheck);
     }
 }

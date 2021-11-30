@@ -20,13 +20,13 @@ namespace Emanuel_Caprariu_lab4.Data.Repositories
             this.ordersContext = ordersContext;
         }
 
-        public TryAsync<List<OrderAddress>> TryGetExistingOrders(IEnumerable<string> orderToCheck) => async () =>
+        public TryAsync<List<int>> TryGetExistingOrders(IEnumerable<int> orderToCheck) => async () =>
         {
             var orders = await ordersContext.OrdersHeader
-                                              .Where(order => orderToCheck.Contains(order.Address))
+                                              .Where(order => orderToCheck.Contains(order.OrderId))
                                               .AsNoTracking()
                                               .ToListAsync();
-            return orders.Select(order => new OrderAddress(order.Address))
+            return orders.Select(order => order.OrderId)
                            .ToList();
         };
     }

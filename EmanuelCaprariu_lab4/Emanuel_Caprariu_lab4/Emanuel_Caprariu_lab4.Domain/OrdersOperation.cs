@@ -54,23 +54,53 @@ namespace Emanuel_Caprariu_lab4
         public static IOrdersCart CalculatePriceOfCart(IOrdersCart orders) => orders.Match(
              whenUnvalidatedOrdersCart: unvalidatedCustomerOrder => unvalidatedCustomerOrder,
              whenInvalidatedOrdersCart: invalidatedCustomerOrder => invalidatedCustomerOrder,
-             whenCalculatedOrder: calculatedOrder =>calculatedOrder,
-             whenPlacedOrder: placedOrder => placedOrder,
+             whenFailedCart: failedCart => failedCart,
+             whenCalculatedOrder: calculatedOrder =>calculatedOrder,           
+             whenPlacedOrder: placedOrder => placedOrder,            
              whenCheckedOrderByCode: checkedOrderByCode => checkedOrderByCode,
-             whenValidatedOrdersCart: validatedOrdersCart =>
-             {
-                
-                 var calculatePrice = validatedOrdersCart.OrdersList.Select(validOrder =>
-                 new CalculateCustomerOrder(validOrder.OrderRegistrationCode, validOrder.OrderDescription, validOrder.OrderAmount, validOrder.OrderAddress, validOrder.OrderPrice, validOrder.OrderPrice * validOrder.OrderAmount));
-
-                 return new CalculatedOrder(calculatePrice.ToList().AsReadOnly());
-             }
+             whenValidatedOrdersCart: CalculateFinalPrice
+             
           );
+
+        private static IOrdersCart CalculateFinalPrice(ValidatedOrdersCart validOrders) =>
+           new CalculatedOrder(validOrders.OrdersList
+                                                   .Select(CalculateOrderFinalPrice)
+                                                   .ToList()
+                                                   .AsReadOnly());
+
+        private static CalculateCustomerOrder CalculateOrderFinalPrice(ValidatedCustomerOrder validOrder) =>
+            new CalculateCustomerOrder(validOrder.OrderRegistrationCode,
+                                      validOrder.OrderDescription,
+                                      validOrder.OrderAmount,
+                                      validOrder.OrderAddress,
+                                      validOrder.OrderPrice,
+                                      validOrder.OrderPrice * validOrder.OrderAmount);
+        public static IOrdersCart MergeOrders(IOrdersCart orders, IEnumerable<CalculateCustomerOrder> existingOrders) => orders.Match(
+                whenUnvalidatedOrdersCart: unvalidatedCustomerOrder => unvalidatedCustomerOrder,
+                whenInvalidatedOrdersCart: invalidatedCustomerOrder => invalidatedCustomerOrder,
+                whenFailedCart: failedCart => failedCart,
+                whenPlacedOrder: placedOrder => placedOrder,
+                whenCheckedOrderByCode: checkedOrderByCode => checkedOrderByCode,
+                whenValidatedOrdersCart: unvalidatedOrdersCart => unvalidatedOrdersCart,
+                whenCalculatedOrder: calculatedOrder => MergeOrders1(calculatedOrder.OrdersList, existingOrders)
+             );
+
+        private static CalculatedOrder MergeOrders1(IEnumerable<CalculateCustomerOrder> newList, IEnumerable<CalculateCustomerOrder> existingList)
+        {
+            var updatedNewOrders= newList.Select(sp => sp with { OrderHeaderId = existingList.FirstOrDefault(s => s.OrderRegistrationCode == sp.OrderRegistrationCode)?.OrderHeaderId ?? 0, IsUpdated = true });
+            var oldList = existingList.Where(sp => !newList.Any(s => s.OrderRegistrationCode == sp.OrderRegistrationCode));
+            var allShoppingCarts = updatedNewOrders.Union(oldList)
+                                               .ToList()
+                                               .AsReadOnly();
+            return new CalculatedOrder(allShoppingCarts);
+        }
+
 
         public static IOrdersCart PlacedOrder(IOrdersCart orders) => orders.Match(
              whenUnvalidatedOrdersCart: unvalidatedCustomerOrder => unvalidatedCustomerOrder,
              whenInvalidatedOrdersCart: invalidatedCustomerOrder => invalidatedCustomerOrder,           
              whenPlacedOrder: placedOrder => placedOrder,
+             whenFailedCart: failedCart => failedCart,
              whenCheckedOrderByCode: checkedOrderByCode => checkedOrderByCode,
              whenValidatedOrdersCart: validatedOrdersCart => validatedOrdersCart,
              whenCalculatedOrder: GenerateExportOfOrder
