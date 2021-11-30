@@ -55,129 +55,129 @@ namespace Emanuel_Caprariu_lab4
                 {
                     Console.WriteLine("Placing order was succeed...");
                     Console.WriteLine(@event.Csv);
-                    foreach (var a in @event.CalculatedOrder)
-                    {
+                    //foreach (var a in @event.CalculatedOrder)
+                    //{
 
-                        listOfValidatedOrders.Add(new(a.OrderRegistrationCode, a.OrderDescription, a.OrderAmount, a.OrderAddress, a.OrderPrice));
-                    }
+                    //    listOfValidatedOrders.Add(new(a.OrderRegistrationCode, a.OrderDescription, a.OrderAmount, a.OrderAddress, a.OrderPrice));
+                    //}
                     Console.WriteLine($"Number Of order : {@event.NumberOfOrder} at Date: {@event.PlacedDate}");
                     return @event;
                 }
                 );
-            string option;
+            //string option;
 
-            do
-            {
-                Console.WriteLine();
-                menu();
-                Console.WriteLine();
-                option = ReadValue("Option :");
-                switch (option)
-                {
+            //do
+            //{
+            //    Console.WriteLine();
+            //    menu();
+            //    Console.WriteLine();
+            //    option = ReadValue("Option :");
+            //    switch (option)
+            //    {
 
-                    case "1":
-                        printThecart(listOfValidatedOrders);
-                        break;
-                    case "2":
-                        string code = ReadValue("Check code for your order... {00000} ");
-                        testRegCode = OrderRegistrationCode.TryParseRegistrationCode(code);
-                        var orderExists = await testRegCode.Match(
-                            Some: testRegCode => CheckOrderExists(testRegCode).Match(Succ: value => value, exeption => false),
-                            None: () => Task.FromResult(false)
-                        );
+            //        case "1":
+            //            printThecart(listOfValidatedOrders);
+            //            break;
+            //        case "2":
+            //            string code = ReadValue("Check code for your order... {00000} ");
+            //            testRegCode = OrderRegistrationCode.TryParseRegistrationCode(code);
+            //            var orderExists = await testRegCode.Match(
+            //                Some: testRegCode => CheckOrderExists(testRegCode).Match(Succ: value => value, exeption => false),
+            //                None: () => Task.FromResult(false)
+            //            );
 
-                        var myResult = from registrationCode in testRegCode
-                                                                        .ToEitherAsync(() => "Invalid Registration Code of your order...")
-                                       from exists in CheckOrderExists(registrationCode)
-                                                      .ToEither(ex =>
-                                                      {
-                                                          Console.Error.WriteLine(ex.ToString());
-                                                          return "Could not validate Registration Code of order";
-                                                      })
-                                       select exists;
+            //            var myResult = from registrationCode in testRegCode
+            //                                                            .ToEitherAsync(() => "Invalid Registration Code of your order...")
+            //                           from exists in CheckOrderExists(registrationCode)
+            //                                          .ToEither(ex =>
+            //                                          {
+            //                                              Console.Error.WriteLine(ex.ToString());
+            //                                              return "Could not validate Registration Code of order";
+            //                                          })
+            //                           select exists;
 
-                        await myResult.Match(
-                             Left: message => Console.WriteLine(message),
-                             Right: flag => Console.WriteLine(flag));
+            //            await myResult.Match(
+            //                 Left: message => Console.WriteLine(message),
+            //                 Right: flag => Console.WriteLine(flag));
 
-                        break;
-                    case "3":
-                        string address = ReadValue("Check address...");
-                        var testAddress = OrderAddress.TryParseOrderAddress(address);
-                        var addressExists = await testAddress.Match(
-                            Some: testAddress => CheckOrderByAddress(testAddress).Match(Succ: value => value, exception => false),
-                            None: () => Task.FromResult(false)
-                            );
+            //            break;
+            //        case "3":
+            //            string address = ReadValue("Check address...");
+            //            var testAddress = OrderAddress.TryParseOrderAddress(address);
+            //            var addressExists = await testAddress.Match(
+            //                Some: testAddress => CheckOrderByAddress(testAddress).Match(Succ: value => value, exception => false),
+            //                None: () => Task.FromResult(false)
+            //                );
 
-                        var myResult3 = from addressOrder in testAddress
-                                                                .ToEitherAsync(() => "Invalid address for your order...")
-                                        from exists in CheckOrderByAddress(addressOrder)
-                                                                .ToEither(ex =>
-                                                                {
-                                                                    Console.Error.WriteLine(ex.ToString());
-                                                                    return "Could not validate address of order...";
-                                                                })
-                                        select exists;
+            //            var myResult3 = from addressOrder in testAddress
+            //                                                    .ToEitherAsync(() => "Invalid address for your order...")
+            //                            from exists in CheckOrderByAddress(addressOrder)
+            //                                                    .ToEither(ex =>
+            //                                                    {
+            //                                                        Console.Error.WriteLine(ex.ToString());
+            //                                                        return "Could not validate address of order...";
+            //                                                    })
+            //                            select exists;
 
-                        await myResult3.Match(
-                            Left: message => Console.WriteLine(message),
-                            Right: flag => Console.WriteLine(flag)
-                            );
-                        break;
-                    case "4":
-                        string code2 = ReadValue("Check code for your order... {00000} ");
-                        testRegCode = OrderRegistrationCode.TryParseRegistrationCode(code2);
-                        var regExists = await testRegCode.Match(
-                            Some: testRegCode => CheckOrderExists(testRegCode).Match(Succ: value => value, exeption => false),
-                            None: () => Task.FromResult(false)
-                        );
+            //            await myResult3.Match(
+            //                Left: message => Console.WriteLine(message),
+            //                Right: flag => Console.WriteLine(flag)
+            //                );
+            //            break;
+            //        case "4":
+            //            string code2 = ReadValue("Check code for your order... {00000} ");
+            //            testRegCode = OrderRegistrationCode.TryParseRegistrationCode(code2);
+            //            var regExists = await testRegCode.Match(
+            //                Some: testRegCode => CheckOrderExists(testRegCode).Match(Succ: value => value, exeption => false),
+            //                None: () => Task.FromResult(false)
+            //            );
 
-                        string stock = ReadValue("Check stock...");
-                        var testAmount = OrderAmount.TryParseOrderAmount(stock);
+            //            string stock = ReadValue("Check stock...");
+            //            var testAmount = OrderAmount.TryParseOrderAmount(stock);
 
-                        var myResult2 = from regCode in testRegCode
-                                                       .ToEitherAsync(() => "Invalid Amount of your order...")
-                                        from amount in OrderAmount.TryParseOrderAmount(stock)
-                                                                        .ToEitherAsync(() => "Invalid Amount of your order...")
-                                        from inStock in CheckOrderByStock(regCode, amount)
-                                                      .ToEither(ex =>
-                                                      {
-                                                          Console.Error.WriteLine(ex.ToString());
-                                                          return "Could not validate Amount of order";
-                                                      })
-                                        select inStock;
+            //            var myResult2 = from regCode in testRegCode
+            //                                           .ToEitherAsync(() => "Invalid Amount of your order...")
+            //                            from amount in OrderAmount.TryParseOrderAmount(stock)
+            //                                                            .ToEitherAsync(() => "Invalid Amount of your order...")
+            //                            from inStock in CheckOrderByStock(regCode, amount)
+            //                                          .ToEither(ex =>
+            //                                          {
+            //                                              Console.Error.WriteLine(ex.ToString());
+            //                                              return "Could not validate Amount of order";
+            //                                          })
+            //                            select inStock;
 
-                        await myResult2.Match(
-                             Left: message => Console.WriteLine(message),
-                             Right: flag => Console.WriteLine(flag));
-                        break;
-                    case "5":
-                        string code3 = ReadValue("Check code for your order... {00000} ");
-                        testRegCode = OrderRegistrationCode.TryParseRegistrationCode(code3);
-                        var regExists1 = await testRegCode.Match(
-                            Some: testRegCode => CheckOrderExists(testRegCode).Match(Succ: value => value, exeption => false),
-                            None: () => Task.FromResult(false)
-                        );
-                        var myResult4 = from regCode in testRegCode
-                                                      .ToEitherAsync(() => "Invalid Amount of your order...")
-                                        from price in CheckPriceForOrder(regCode)
-                                                      .ToEither(ex =>
-                                                      {
-                                                          Console.Error.WriteLine(ex.ToString());
-                                                          return "Could not validate Amount of order";
-                                                      })
-                                        select price;
+            //            await myResult2.Match(
+            //                 Left: message => Console.WriteLine(message),
+            //                 Right: flag => Console.WriteLine(flag));
+            //            break;
+            //        case "5":
+            //            string code3 = ReadValue("Check code for your order... {00000} ");
+            //            testRegCode = OrderRegistrationCode.TryParseRegistrationCode(code3);
+            //            var regExists1 = await testRegCode.Match(
+            //                Some: testRegCode => CheckOrderExists(testRegCode).Match(Succ: value => value, exeption => false),
+            //                None: () => Task.FromResult(false)
+            //            );
+            //            var myResult4 = from regCode in testRegCode
+            //                                          .ToEitherAsync(() => "Invalid Amount of your order...")
+            //                            from price in CheckPriceForOrder(regCode)
+            //                                          .ToEither(ex =>
+            //                                          {
+            //                                              Console.Error.WriteLine(ex.ToString());
+            //                                              return "Could not validate Amount of order";
+            //                                          })
+            //                            select price;
 
-                        await myResult4.Match(
-                             Left: message => Console.WriteLine(message),
-                             Right: flag => Console.WriteLine("The price for your order: " + flag + " LEI "));
-                        break;
-                    case "clear":
-                        Console.Clear();
-                        break;
-                }
+            //            await myResult4.Match(
+            //                 Left: message => Console.WriteLine(message),
+            //                 Right: flag => Console.WriteLine("The price for your order: " + flag + " LEI "));
+            //            break;
+            //        case "clear":
+            //            Console.Clear();
+            //            break;
+            //    }
 
-            } while (option != "q");
+            //} while (option != "q");
 
         }
 
