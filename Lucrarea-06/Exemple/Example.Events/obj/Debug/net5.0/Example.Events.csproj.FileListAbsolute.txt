@@ -1,0 +1,12 @@
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\bin\Debug\net5.0\Example.Events.deps.json
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\bin\Debug\net5.0\Example.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\bin\Debug\net5.0\ref\Example.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\bin\Debug\net5.0\Example.Events.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\obj\Debug\net5.0\Example.Events.csproj.AssemblyReference.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\obj\Debug\net5.0\Example.Events.GeneratedMSBuildEditorConfig.editorconfig
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\obj\Debug\net5.0\Example.Events.AssemblyInfoInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\obj\Debug\net5.0\Example.Events.AssemblyInfo.cs
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\obj\Debug\net5.0\Example.Events.csproj.CoreCompileInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\obj\Debug\net5.0\Example.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\obj\Debug\net5.0\ref\Example.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events\obj\Debug\net5.0\Example.Events.pdb

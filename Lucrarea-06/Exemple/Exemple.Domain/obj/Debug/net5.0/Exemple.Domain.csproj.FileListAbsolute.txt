@@ -1,0 +1,17 @@
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\bin\Debug\net5.0\Exemple.Domain.deps.json
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\bin\Debug\net5.0\Exemple.Domain.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\bin\Debug\net5.0\ref\Exemple.Domain.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\bin\Debug\net5.0\Exemple.Domain.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\bin\Debug\net5.0\Example.Dto.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\bin\Debug\net5.0\Example.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\bin\Debug\net5.0\Example.Dto.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\bin\Debug\net5.0\Example.Events.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\obj\Debug\net5.0\Exemple.Domain.csproj.AssemblyReference.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\obj\Debug\net5.0\Exemple.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\obj\Debug\net5.0\Exemple.Domain.AssemblyInfoInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\obj\Debug\net5.0\Exemple.Domain.AssemblyInfo.cs
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\obj\Debug\net5.0\Exemple.Domain.csproj.CoreCompileInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\obj\Debug\net5.0\Exemple.Domain.csproj.CopyComplete
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\obj\Debug\net5.0\Exemple.Domain.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\obj\Debug\net5.0\ref\Exemple.Domain.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Exemple.Domain\obj\Debug\net5.0\Exemple.Domain.pdb

@@ -1,0 +1,12 @@
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\bin\Debug\net5.0\Example.Dto.deps.json
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\bin\Debug\net5.0\Example.Dto.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\bin\Debug\net5.0\ref\Example.Dto.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\bin\Debug\net5.0\Example.Dto.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\obj\Debug\net5.0\Example.Dto.csproj.AssemblyReference.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\obj\Debug\net5.0\Example.Dto.GeneratedMSBuildEditorConfig.editorconfig
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\obj\Debug\net5.0\Example.Dto.AssemblyInfoInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\obj\Debug\net5.0\Example.Dto.AssemblyInfo.cs
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\obj\Debug\net5.0\Example.Dto.csproj.CoreCompileInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\obj\Debug\net5.0\Example.Dto.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\obj\Debug\net5.0\ref\Example.Dto.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Dto\obj\Debug\net5.0\Example.Dto.pdb

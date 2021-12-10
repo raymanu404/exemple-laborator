@@ -25,7 +25,7 @@ namespace Emanuel_Caprariu_lab4.Data.Repositories
 
         public TryAsync<List<CalculateCustomerOrder>> TryGetExistingOrders() => async () => (await (
                          from o in ordersContext.OrdersLine
-                         join p in ordersContext.Products on o.OrderLineId equals p.ProductId
+                         join p in ordersContext.Products on o.ProductId equals p.ProductId
                          join oh in ordersContext.OrdersHeader on o.OrderId equals oh.OrderId
                          select new { o.OrderLineId,p.RegistrationCode, p.Description, o.Amount, oh.Address, o.Price,oh.Total})
                          .AsNoTracking()

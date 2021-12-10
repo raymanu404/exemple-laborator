@@ -27,5 +27,7 @@ namespace Emanuel_Caprariu_Lab5_Web_API.Models
         [Required]
         [Range(1,999999)]
         public float Price { get; set; }
+        [Range(1, 999999)]
+        public float FinalPrice { get; set; }
     }
 }

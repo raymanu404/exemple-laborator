@@ -1,0 +1,15 @@
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\bin\Debug\net5.0\Example.Events.ServiceBus.deps.json
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\bin\Debug\net5.0\Example.Events.ServiceBus.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\bin\Debug\net5.0\ref\Example.Events.ServiceBus.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\bin\Debug\net5.0\Example.Events.ServiceBus.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\bin\Debug\net5.0\Example.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\bin\Debug\net5.0\Example.Events.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\obj\Debug\net5.0\Example.Events.ServiceBus.csproj.AssemblyReference.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\obj\Debug\net5.0\Example.Events.ServiceBus.GeneratedMSBuildEditorConfig.editorconfig
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\obj\Debug\net5.0\Example.Events.ServiceBus.AssemblyInfoInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\obj\Debug\net5.0\Example.Events.ServiceBus.AssemblyInfo.cs
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\obj\Debug\net5.0\Example.Events.ServiceBus.csproj.CoreCompileInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\obj\Debug\net5.0\Example.Events.ServiceBus.csproj.CopyComplete
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\obj\Debug\net5.0\Example.Events.ServiceBus.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\obj\Debug\net5.0\ref\Example.Events.ServiceBus.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\Lucrarea-06\Exemple\Example.Events.ServiceBus\obj\Debug\net5.0\Example.Events.ServiceBus.pdb
