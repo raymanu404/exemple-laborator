@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Emanuel_Caprariu_lab6.Dto/1.0.0": {
+        "runtime": {
+          "Emanuel_Caprariu_lab6.Dto.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Emanuel_Caprariu_lab6.Dto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

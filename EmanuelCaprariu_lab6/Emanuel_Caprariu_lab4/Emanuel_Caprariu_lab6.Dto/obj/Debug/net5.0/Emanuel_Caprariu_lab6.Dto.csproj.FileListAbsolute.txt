@@ -1,0 +1,12 @@
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\bin\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.deps.json
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\bin\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\bin\Debug\net5.0\ref\Emanuel_Caprariu_lab6.Dto.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\bin\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.csproj.AssemblyReference.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.GeneratedMSBuildEditorConfig.editorconfig
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.AssemblyInfoInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.AssemblyInfo.cs
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.csproj.CoreCompileInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\obj\Debug\net5.0\ref\Emanuel_Caprariu_lab6.Dto.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Dto\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Dto.pdb

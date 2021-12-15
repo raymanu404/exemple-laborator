@@ -16,6 +16,9 @@ using Emanuel_Caprariu_lab4.Data;
 using Emanuel_Caprariu_lab4.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Emanuel_Caprariu_lab4.Domain;
+using Microsoft.Extensions.Azure;
+using Emanuel_Caprariu_lab6.Events;
+using Emanuel_Caprariu_lab6.Events.ServiceBus;
 
 namespace Emanuel_Caprariu_Lab5_Web_API
 {
@@ -38,11 +41,17 @@ namespace Emanuel_Caprariu_Lab5_Web_API
             services.AddTransient<IOrderLineRepository, OrderLineRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<Emanuel_Caprariu_lab4.PlacingOrderWorkflow>();
+            services.AddSingleton<IEventSender, ServiceBusTopicEventSender>();
+
+            services.AddAzureClients(builder =>
+            {
+                builder.AddServiceBusClient(Configuration.GetConnectionString("ServiceBus"));
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Emanuel_Caprariu_Lab5_Web_API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Emanuel_Caprariu_Lab6_Web_API", Version = "v1" });
             });
         }
 
@@ -53,7 +62,7 @@ namespace Emanuel_Caprariu_Lab5_Web_API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Emanuel_Caprariu_Lab5_Web_API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Emanuel_Caprariu_Lab6_Web_API v1"));
             }
 
             app.UseHttpsRedirection();

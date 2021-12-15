@@ -1,0 +1,12 @@
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\bin\Debug\net5.0\Emanuel_Caprariu_lab6.Events.deps.json
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\bin\Debug\net5.0\Emanuel_Caprariu_lab6.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\bin\Debug\net5.0\ref\Emanuel_Caprariu_lab6.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\bin\Debug\net5.0\Emanuel_Caprariu_lab6.Events.pdb
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Events.csproj.AssemblyReference.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Events.GeneratedMSBuildEditorConfig.editorconfig
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Events.AssemblyInfoInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Events.AssemblyInfo.cs
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Events.csproj.CoreCompileInputs.cache
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\obj\Debug\net5.0\ref\Emanuel_Caprariu_lab6.Events.dll
+E:\Anul 4\SEM I\PSSC\exemple-laborator\EmanuelCaprariu_lab6\Emanuel_Caprariu_lab4\Emanuel_Caprariu_lab6.Events\obj\Debug\net5.0\Emanuel_Caprariu_lab6.Events.pdb

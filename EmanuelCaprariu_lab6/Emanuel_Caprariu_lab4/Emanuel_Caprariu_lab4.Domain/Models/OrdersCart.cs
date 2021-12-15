@@ -34,10 +34,13 @@ namespace Domain.Models
 
         public record FailedCart : IOrdersCart
         {
-            internal FailedCart(string reason)
-            {              
+            internal FailedCart(IReadOnlyCollection<UnvalidatedCustomerOrder> ordersList, string reason)
+            {
+                OrdersList = ordersList;
                 Reason = reason;
-            }          
+
+            }
+            public IReadOnlyCollection<UnvalidatedCustomerOrder> OrdersList { get; }
             public string Reason { get; }
         }
 
@@ -75,6 +78,7 @@ namespace Domain.Models
                 NumberOfOrder = numberOfOrder;
                 PlacedDate = placedDate;
                 Csv = csv;
+                
             }
             public IReadOnlyCollection<CalculateCustomerOrder> CalculateCustomerOrders { get; }
             public int NumberOfOrder { get; }

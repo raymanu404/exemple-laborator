@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+ 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Azure" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Emanuel_Caprariu_lab6.Dto\Emanuel_Caprariu_lab6.Dto.csproj" />
+    <ProjectReference Include="..\Emanuel_Caprariu_lab6.Events.ServiceBus\Emanuel_Caprariu_lab6.Events.ServiceBus.csproj" />
+    <ProjectReference Include="..\Emanuel_Caprariu_lab6.Events\Emanuel_Caprariu_lab6.Events.csproj" />
+  </ItemGroup>
+
+</Project>

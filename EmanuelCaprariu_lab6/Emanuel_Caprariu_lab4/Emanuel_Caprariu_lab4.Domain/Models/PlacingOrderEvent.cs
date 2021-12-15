@@ -14,10 +14,10 @@ namespace Domain.Models
             public DateTime PlacedDate { get; }
 
             public string Csv { get; }
-            public IReadOnlyCollection<CalculateCustomerOrder> CalculatedOrder { get; }
-            internal PlacingOrderSuccedeedEvent(IReadOnlyCollection<CalculateCustomerOrder> calculatedOrder,string csv, decimal numberOfOrder,DateTime placedDate)
+            public IEnumerable<PlacedCartOrder> Orders { get; }
+            internal PlacingOrderSuccedeedEvent(IEnumerable<PlacedCartOrder> orders,string csv, decimal numberOfOrder,DateTime placedDate)
             {
-                CalculatedOrder = calculatedOrder;
+                Orders = orders;
                 Csv = csv;
                 NumberOfOrder = numberOfOrder;
                 PlacedDate = placedDate;
